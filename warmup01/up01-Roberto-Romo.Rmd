@@ -1,0 +1,84 @@
+---
+title: "up01-Roberto-Romo"
+output: github_document
+---
+ 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Cooking Recipe
+
+### Ingredients for Flan
+
+* 2/3 cup of white sugar
+* 1 cup milk
+* 1 can sweetened condensed milk
+* 2 cups heavy cream
+* 5 eggs
+* 2 teaspoons of vanilla extract
+  
+### Special Tools for Flan:  
+* Casserole Dish
+* Blender
+* Nonstick saucepan
+* Outer Pan 
+* Large Spoon 
+
+### Steps:
+1. Preheat oven to 350 degrees F (175 degrees C).
+2. In a small nonstick saucepan, heat the sugar over medium heat. Shake and swirl occasionally to distribute sugar until it is dissolved and begins to brown. Lift the pan over the heat source (4 to 6 inches) and continue to brown the sugar until it becomes a dark golden brown. You may slightly stir while cooking, but continually stirring causes the sugar to crystallize. Pour caramelized sugar into a 1 1/2 quart casserole dish or a large loaf pan, and swirl to coat the bottom of the pan evenly.
+3. In a blender, combine sweetened condensed milk, cream, milk, eggs and vanilla. Blend on high for one minute. Pour over the caramelized sugar.
+4. Place the filled casserole dish into a larger pan and add 1 inch of HOT water to the outer pan. Bake in preheated oven for 50 to 60 minutes, or until set.
+
+### Image of Flan
+
+![FLAN!](data:image/jpeg;base64,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)
+
+##### When to use recipe:
+
+Although Flan originate in the Roman Empire, it has become a traditional Mexican dessert served in any occassion from birthday parties, to casual dinners, and for el "antojo". There is not a single occassion where one needs to eat or make flan, if it were possible I would eat Flan everyday! Today, there are many variations of flan, especially in the Mexican cuisine, ranging from Choco-Flan (chocolate cake topped with flan), Coffee Flan, Flan with Fruit, Coconut Flan, etc..,
+
+## Quadratic Equation:
+```
+a*x^2 + b*x + c = 0
+```
+
+##### Description:
+The quadratic equation is an equation of the above form where x
+represents an unkown, and a,b, and c represent known numbers such that a is not equal to 0, if a is zero, the equation is linear not quadratic.  The numbers a, b, and c are the coefficients of the equation, and may be distinguished by calling them, respectively, the quadratic coefficient, the linear coefficient and the constant or free term
+
+
+### Quadratic Formula:
+```
+x = (-b + (b^2 - 4*a*c)^(1/2)) / 2*a
+x = (-b + (b^2 + 4*a*c)^(1/2)) / 2*a
+```
+
+or
+
+$-b \pm \sqrt{b^2 - 4ac} \over 2a$
+
+
+## Comments and Reflections:
+* What things were hard, even though you saw them in class?
+  - Setting the quadratic formula to get it to look pretty. I have 
+    extensive experience with programs and programming, the other 
+    hard part is getting used to syntax.
+* What was easy(-ish) even though we haven't done it in class?
+  - Filling in the asked questions, like the recipe. Following the 
+    markdown guides and cheat sheets was easy.
+* Was this the first time you were using markdown? If yes, how do you   feel about it?
+  - It was the first time, I think it is straightforward.
+* If you have used markdown before, was there something new you learned while doing this assignment?
+  - N/A
+* Did you need help to complete the assignment? If so, what kind of help? Who helped you?
+  - I googled some stuff
+* How much time did it take to complete this HW?
+  - About 20 minutes
+* What was the most time consuming part?
+  - Setting up the quadratic formula.
+
+
+
+
