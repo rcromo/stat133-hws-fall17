@@ -1,4 +1,4 @@
-# HW01 - Summarizing Variables
+# HW02 - Data Frame Basics
 
 The purpose of this HW is to summarize variables (quantatitative and categorical) graphically and numerically.
 
