@@ -46,9 +46,9 @@ datt <- read_csv('nba2017-player-statistics.csv', col_types =  list(
 str(datt)
 
 #3
-dat$Experience[dat$Experience == "R"] <- 0 # Replace "R" with '0'
-dat$Experience
-as.numeric(as.character(dat$Experience)) #change Experience column from char to numbers
+datt$Experience[datt$Experience == "R"] <- 0 # Replace "R" with '0'
+datt$Experience
+as.numeric(as.character(datt$Experience)) #change Experience column from char to numbers
 
 
 #4
@@ -63,36 +63,37 @@ datt <- cbind(datt, PTS)
 datt <- cbind(datt, MPG)
 datt <- cbind(datt, REB)
 EFF <- (datt$PTS + datt$REB + datt$AST + datt$STL + datt$BLK - datt$Missed_FG - datt$Missed_FT - datt$TO) / datt$GP
-dat <- cbind(datt, EFF)
+datt <- cbind(datt, EFF)
 
 summary(datt$EFF)
 
 #histogram
-hist(c(EFF, table(EFF)))
+#hist(c(EFF, table(EFF)))
 hist(EFF, freq = table(EFF))
 #display player, team, salary, eff for top 10 players by eff in decreasing order
-daa <- select(dat, Player, Team, Salary, EFF)
-head(arrange(daa, desc(dat$EFF)), 10)
+dat2 <- select(datt, Player, Team, Salary, EFF)
+head(arrange(dat2, desc(datt$EFF)), 10)
+
 #filter players with negative EFF
-filter(daa, EFF < 0)
+filter(dat2, EFF < 0)
 #cor of EFF with other variables
-xpts <- cor(EFF, dat$PTS)
+xpts <- cor(EFF, datt$PTS)
 xpts
-xreb <- cor(EFF, dat$REB)
+xreb <- cor(EFF, datt$REB)
 xreb
-xast <- cor(EFF, dat$AST)
+xast <- cor(EFF, datt$AST)
 xast
-xstl <- cor(EFF, dat$STL)
+xstl <- cor(EFF, datt$STL)
 xstl
-xblk <- cor(EFF, dat$BLK)
+xblk <- cor(EFF, datt$BLK)
 xblk
-xmg <- cor(EFF, -dat$Missed_FG)
+xmg <- cor(EFF, -datt$Missed_FG)
 xmg
-xmt <- cor(EFF, -dat$Missed_FT)
+xmt <- cor(EFF, -datt$Missed_FT)
 xmt
-xto <- cor(EFF, -dat$TO)
+xto <- cor(EFF, -datt$TO)
 xto
-xgp <- cor(EFF, dat$GP)
+xgp <- cor(EFF, datt$GP)
 xgp
 
 bpdata <- c(xpts, xreb, xast, xstl, xblk, xmg, xmt, xto, xgp)
@@ -103,25 +104,25 @@ barplot(newD, col = c("blue", "blue", "blue", "blue", "blue", "blue", "red", "re
 
 #5
 #plot
-plot(dat$EFF, dat$Salary/1000000,col = "#55555555" ,cex = .8,pch = 19, xlab = "EFF (efficiency)", ylab = "Salary (in millions)", main = "Scatterplot with lowess smooth")
-lines(lowess(dat$EFF, dat$Salary/1000000), lwd = 3, col = "#F15C3C")
+plot(datt$EFF, datt$Salary/1000000,col = "#55555555" ,cex = .8,pch = 19, xlab = "EFF (efficiency)", ylab = "Salary (in millions)", main = "Scatterplot with lowess smooth")
+lines(lowess(datt$EFF, datt$Salary/1000000), lwd = 3, col = "#F15C3C")
 
 #linear correlation coefficient
-n <- length(dat$Salary)
+n <- length(datt$Salary)
 n
-salary_mean = mean(dat$Salary)
+salary_mean = mean(datt$Salary)
 salary_mean
 
-eff_mean = mean(dat$EFF)
+eff_mean = mean(datt$EFF)
 eff_mean
 
-salary_var = var(dat$Salary)
+salary_var = var(datt$Salary)
 salary_var
 
-eff_var = var(dat$EFF)
+eff_var = var(datt$EFF)
 eff_var
 
-covES <- cov(dat$Salary, dat$EFF)
+covES <- cov(datt$Salary, datt$EFF)
 covES
 
 correlation <- covES / (sqrt(salary_var) * sqrt(eff_var))
@@ -131,7 +132,7 @@ correlation
 
 #Rookie Calculation
 
-newMPG <- filter(dat, dat$MPG >= 20)
+newMPG <- filter(datt, datt$MPG >= 20)
 players2 <- data.frame(newMPG)
 players2
 

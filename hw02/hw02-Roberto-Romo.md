@@ -150,8 +150,8 @@ str(datt)
 
 ``` r
 #3
-dat$Experience[dat$Experience == "R"] <- 0 # Replace "R" with '0'
-dat$Experience
+datt$Experience[datt$Experience == "R"] <- 0 # Replace "R" with '0'
+datt$Experience
 ```
 
     ##   [1] "9"  "11" "6"  "0"  "9"  "5"  "4"  "2"  "0"  "6"  "1"  "3"  "2"  "1" 
@@ -188,7 +188,7 @@ dat$Experience
     ## [435] "9"  "13" "0"  "11" "2"  "0"  "15"
 
 ``` r
-as.numeric(as.character(dat$Experience)) #change Experience column from char to numbers
+as.numeric(as.character(datt$Experience)) #change Experience column from char to numbers
 ```
 
     ##   [1]  9 11  6  0  9  5  4  2  0  6  1  3  2  1  4 10 12 11  5  1  5 12 13
@@ -225,22 +225,17 @@ datt <- cbind(datt, PTS)
 datt <- cbind(datt, MPG)
 datt <- cbind(datt, REB)
 EFF <- (datt$PTS + datt$REB + datt$AST + datt$STL + datt$BLK - datt$Missed_FG - datt$Missed_FT - datt$TO) / datt$GP
-dat <- cbind(datt, EFF)
+datt <- cbind(datt, EFF)
 
 summary(datt$EFF)
 ```
 
-    ## Length  Class   Mode 
-    ##      0   NULL   NULL
+    ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    ##  -0.600   5.452   9.090  10.140  13.250  33.840
 
 ``` r
 #histogram
-hist(c(EFF, table(EFF)))
-```
-
-![](hw02-Roberto-Romo_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-1-1.png)
-
-``` r
+#hist(c(EFF, table(EFF)))
 hist(EFF, freq = table(EFF))
 ```
 
@@ -250,12 +245,12 @@ hist(EFF, freq = table(EFF))
     ## Warning in if (!freq) "Density" else "Frequency": the condition has length
     ## > 1 and only the first element will be used
 
-![](hw02-Roberto-Romo_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-1-2.png)
+![](hw02-Roberto-Romo_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-1-1.png)
 
 ``` r
 #display player, team, salary, eff for top 10 players by eff in decreasing order
-daa <- select(dat, Player, Team, Salary, EFF)
-head(arrange(daa, desc(dat$EFF)), 10)
+dat2 <- select(datt, Player, Team, Salary, EFF)
+head(arrange(dat2, desc(datt$EFF)), 10)
 ```
 
     ##                   Player Team   Salary      EFF
@@ -272,7 +267,7 @@ head(arrange(daa, desc(dat$EFF)), 10)
 
 ``` r
 #filter players with negative EFF
-filter(daa, EFF < 0)
+filter(dat2, EFF < 0)
 ```
 
     ##            Player Team Salary  EFF
@@ -280,63 +275,63 @@ filter(daa, EFF < 0)
 
 ``` r
 #cor of EFF with other variables
-xpts <- cor(EFF, dat$PTS)
+xpts <- cor(EFF, datt$PTS)
 xpts
 ```
 
     ## [1] 0.8588644
 
 ``` r
-xreb <- cor(EFF, dat$REB)
+xreb <- cor(EFF, datt$REB)
 xreb
 ```
 
     ## [1] 0.7634501
 
 ``` r
-xast <- cor(EFF, dat$AST)
+xast <- cor(EFF, datt$AST)
 xast
 ```
 
     ## [1] 0.6689232
 
 ``` r
-xstl <- cor(EFF, dat$STL)
+xstl <- cor(EFF, datt$STL)
 xstl
 ```
 
     ## [1] 0.6957286
 
 ``` r
-xblk <- cor(EFF, dat$BLK)
+xblk <- cor(EFF, datt$BLK)
 xblk
 ```
 
     ## [1] 0.5679571
 
 ``` r
-xmg <- cor(EFF, -dat$Missed_FG)
+xmg <- cor(EFF, -datt$Missed_FG)
 xmg
 ```
 
     ## [1] -0.7722477
 
 ``` r
-xmt <- cor(EFF, -dat$Missed_FT)
+xmt <- cor(EFF, -datt$Missed_FT)
 xmt
 ```
 
     ## [1] -0.7271456
 
 ``` r
-xto <- cor(EFF, -dat$TO)
+xto <- cor(EFF, -datt$TO)
 xto
 ```
 
     ## [1] -0.8003289
 
 ``` r
-xgp <- cor(EFF, dat$GP)
+xgp <- cor(EFF, datt$GP)
 xgp
 ```
 
@@ -356,55 +351,55 @@ newD
 barplot(newD, col = c("blue", "blue", "blue", "blue", "blue", "blue", "red", "red", "red"), main = 'Correlation Between Player Stats and EFF',names.arg = c('PTS', 'REB', 'AST', 'STL', 'BLK', 'MG', 'MT', 'TO', 'GP'), border =TRUE, ylim = c(-1,1))
 ```
 
-![](hw02-Roberto-Romo_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-1-3.png)
+![](hw02-Roberto-Romo_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-1-2.png)
 
 ``` r
 #5
 #plot
-plot(dat$EFF, dat$Salary/1000000,col = "#55555555" ,cex = .8,pch = 19, xlab = "EFF (efficiency)", ylab = "Salary (in millions)", main = "Scatterplot with lowess smooth")
-lines(lowess(dat$EFF, dat$Salary/1000000), lwd = 3, col = "#F15C3C")
+plot(datt$EFF, datt$Salary/1000000,col = "#55555555" ,cex = .8,pch = 19, xlab = "EFF (efficiency)", ylab = "Salary (in millions)", main = "Scatterplot with lowess smooth")
+lines(lowess(datt$EFF, datt$Salary/1000000), lwd = 3, col = "#F15C3C")
 ```
 
-![](hw02-Roberto-Romo_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-1-4.png)
+![](hw02-Roberto-Romo_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-1-3.png)
 
 ``` r
 #linear correlation coefficient
-n <- length(dat$Salary)
+n <- length(datt$Salary)
 n
 ```
 
     ## [1] 441
 
 ``` r
-salary_mean = mean(dat$Salary)
+salary_mean = mean(datt$Salary)
 salary_mean
 ```
 
     ## [1] 6187014
 
 ``` r
-eff_mean = mean(dat$EFF)
+eff_mean = mean(datt$EFF)
 eff_mean
 ```
 
     ## [1] 10.13654
 
 ``` r
-salary_var = var(dat$Salary)
+salary_var = var(datt$Salary)
 salary_var
 ```
 
     ## [1] 4.318973e+13
 
 ``` r
-eff_var = var(dat$EFF)
+eff_var = var(datt$EFF)
 eff_var
 ```
 
     ## [1] 40.13392
 
 ``` r
-covES <- cov(dat$Salary, dat$EFF)
+covES <- cov(datt$Salary, datt$EFF)
 covES
 ```
 
@@ -422,7 +417,7 @@ correlation
 
 #Rookie Calculation
 
-newMPG <- filter(dat, dat$MPG >= 20)
+newMPG <- filter(datt, datt$MPG >= 20)
 players2 <- data.frame(newMPG)
 players2
 ```
@@ -470,7 +465,7 @@ players2
     ## 40               Greg Monroe  MIL        C          6 17100000    5  26 81
     ## 41             Jabari Parker  MIL       PF          2  5374320    6  21 51
     ## 42           Khris Middleton  MIL       SF          4 15200000   11  25 29
-    ## 43           Malcolm Brogdon  MIL       SG          R   925000    4  24 75
+    ## 43           Malcolm Brogdon  MIL       SG          0   925000    4  24 75
     ## 44       Matthew Dellavedova  MIL       PG          3  9607500    3  26 76
     ## 45                Tony Snell  MIL       SG          3  2368327    2  25 80
     ## 46                C.J. Miles  IND       SF         11  4583450    6  29 76
@@ -491,7 +486,7 @@ players2
     ## 61             James Johnson  MIA       PF          7  4000000    4  29 76
     ## 62           Josh Richardson  MIA       SG          1   874636    6  23 53
     ## 63           Justise Winslow  MIA       SF          1  2593440   11  20 18
-    ## 64           Rodney McGruder  MIA       SG          R   543471    5  25 78
+    ## 64           Rodney McGruder  MIA       SG          0   543471    5  25 78
     ## 65             Tyler Johnson  MIA       PG          2  5628000    3  24 73
     ## 66           Wayne Ellington  MIA       SG          7  6000000    7  29 62
     ## 67            Andre Drummond  DET        C          4 22116750    4  23 81
@@ -522,12 +517,12 @@ players2
     ## 92               Jodie Meeks  ORL       SG          7  6540000   12  29 36
     ## 93            Nikola Vucevic  ORL        C          5 11750000    4  26 75
     ## 94             Terrence Ross  ORL       SF          4 10000000   11  25 24
-    ## 95            Alex Poythress  PHI       PF          R    31969   16  23  6
-    ## 96               Dario Saric  PHI       PF          R  2318280    3  22 81
+    ## 95            Alex Poythress  PHI       PF          0    31969   16  23  6
+    ## 96               Dario Saric  PHI       PF          0  2318280    3  22 81
     ## 97          Gerald Henderson  PHI       SG          7  9000000    5  29 72
     ## 98             Jahlil Okafor  PHI        C          1  4788840   10  21 50
     ## 99            Jerryd Bayless  PHI       PG          8  9424084   19  28  3
-    ## 100              Joel Embiid  PHI        C          R  4826160   11  22 31
+    ## 100              Joel Embiid  PHI        C          0  4826160   11  22 31
     ## 101          Justin Anderson  PHI       SF          1  1514160   14  23 24
     ## 102             Nik Stauskas  PHI       SG          2  2993040    1  23 80
     ## 103           Richaun Holmes  PHI        C          1  1025831    8  23 57
@@ -535,8 +530,8 @@ players2
     ## 105         Sergio Rodriguez  PHI       PG          4  8000000    6  30 68
     ## 106           T.J. McConnell  PHI       PG          1   874636    2  24 81
     ## 107              Brook Lopez  BRK        C          8 21165675    1  28 75
-    ## 108             Caris LeVert  BRK       SF          R  1562280    9  22 57
-    ## 109         Isaiah Whitehead  BRK       PG          R  1074145    5  21 73
+    ## 108             Caris LeVert  BRK       SF          0  1562280    9  22 57
+    ## 109         Isaiah Whitehead  BRK       PG          0  1074145    5  21 73
     ## 110               Jeremy Lin  BRK       PG          6 11483254   12  28 36
     ## 111               Joe Harris  BRK       SG          2   980431   11  25 52
     ## 112  Rondae Hollis-Jefferson  BRK       SF          1  1395600    2  22 78
@@ -562,7 +557,7 @@ players2
     ## 132         Patrick Beverley  HOU       SG          4  6000000    5  28 67
     ## 133            Ryan Anderson  HOU       PF          8 18735364    4  28 72
     ## 134             Trevor Ariza  HOU       SF         12  7806971    2  31 80
-    ## 135            Troy Williams  HOU       SF          R   150000   14  22  6
+    ## 135            Troy Williams  HOU       SF          0   150000   14  22  6
     ## 136            Austin Rivers  LAC       SG          4 11000000    5  24 74
     ## 137            Blake Griffin  LAC       PF          6 20140838    4  27 61
     ## 138               Chris Paul  LAC       PG         11 22868828    6  31 61
@@ -580,13 +575,13 @@ players2
     ## 150              Rudy Gobert  UTA        C          3  2121288    1  24 81
     ## 151             Shelvin Mack  UTA       PG          5  2433334    9  26 55
     ## 152           Andre Roberson  OKC       SF          3  2183072    3  25 79
-    ## 153         Domantas Sabonis  OKC       PF          R  2440200    5  20 81
+    ## 153         Domantas Sabonis  OKC       PF          0  2440200    5  20 81
     ## 154              Enes Kanter  OKC        C          5 17145838    6  24 72
     ## 155        Russell Westbrook  OKC       PG          8 26540100    1  28 81
     ## 156             Steven Adams  OKC        C          3  3140517    2  23 80
     ## 157               Taj Gibson  OKC       PF          7  8950000   12  31 23
     ## 158           Victor Oladipo  OKC       SG          3  6552960    4  24 67
-    ## 159          Andrew Harrison  MEM       PG          R   945000    8  22 72
+    ## 159          Andrew Harrison  MEM       PG          0   945000    8  22 72
     ## 160              James Ennis  MEM       SF          2  2898000    7  26 64
     ## 161           JaMychal Green  MEM       PF          2   980431    3  26 77
     ## 162               Marc Gasol  MEM        C          8 21165675    1  32 74
@@ -604,7 +599,7 @@ players2
     ## 174         Danilo Gallinari  DEN       SF          7 15050000    2  28 63
     ## 175          Emmanuel Mudiay  DEN       PG          1  3241800    8  20 55
     ## 176              Gary Harris  DEN       SG          2  1655880    5  22 57
-    ## 177             Jamal Murray  DEN       SG          R  3210840    6  19 82
+    ## 177             Jamal Murray  DEN       SG          0  3210840    6  19 82
     ## 178            Jameer Nelson  DEN       PG         12  4540525    3  34 75
     ## 179           Kenneth Faried  DEN       PF          5 12078652    9  27 61
     ## 180            Mason Plumlee  DEN        C          3  2328530   13  26 27
@@ -622,16 +617,16 @@ players2
     ## 192              Tim Frazier  NOP       PG          2  2090000    6  26 65
     ## 193          DeAndre Liggins  DAL       SG          3  1015696   23  28  1
     ## 194            Dirk Nowitzki  DAL       PF         18 25000000    5  38 54
-    ## 195      Dorian Finney-Smith  DAL       PF          R   543471    4  23 81
+    ## 195      Dorian Finney-Smith  DAL       PF          0   543471    4  23 81
     ## 196          Harrison Barnes  DAL       PF          4 22116750    1  24 79
     ## 197               J.J. Barea  DAL       PG         10  4096950   11  32 35
     ## 198             Nerlens Noel  DAL        C          2  4384490   15  22 22
     ## 199               Seth Curry  DAL       PG          3  2898000    3  26 70
     ## 200          Wesley Matthews  DAL       SG          7 17100000    2  30 73
-    ## 201             Yogi Ferrell  DAL       PG          R   207798    9  23 36
+    ## 201             Yogi Ferrell  DAL       PG          0   207798    9  23 36
     ## 202         Anthony Tolliver  SAC       PF          8  8000000    6  31 65
     ## 203            Arron Afflalo  SAC       SG          9 12500000    5  31 61
-    ## 204              Buddy Hield  SAC       SG          R  3517200   12  23 25
+    ## 204              Buddy Hield  SAC       SG          0  3517200   12  23 25
     ## 205          Darren Collison  SAC       PG          7  5229454    1  29 68
     ## 206           Garrett Temple  SAC       SG          6  8000000    4  30 65
     ## 207                 Rudy Gay  SAC       SF         10 13333333   11  30 30
@@ -643,7 +638,7 @@ players2
     ## 213       Karl-Anthony Towns  MIN        C          1  5960160    2  21 82
     ## 214              Ricky Rubio  MIN       PG          5 13550000    4  26 75
     ## 215              Zach LaVine  MIN       SG          2  2240880    5  21 47
-    ## 216           Brandon Ingram  LAL       SF          R  5281680    2  19 79
+    ## 216           Brandon Ingram  LAL       SF          0  5281680    2  19 79
     ## 217         D'Angelo Russell  LAL       PG          1  5332800    4  20 63
     ## 218          Jordan Clarkson  LAL       SG          2 12500000    1  24 82
     ## 219            Julius Randle  LAL       PF          2  3267120    3  22 74
@@ -656,7 +651,7 @@ players2
     ## 226             Devin Booker  PHO       SG          1  2223600    1  20 78
     ## 227             Eric Bledsoe  PHO       PG          6 14000000    2  27 66
     ## 228             Jared Dudley  PHO       PF          9 10470000    7  31 64
-    ## 229          Marquese Chriss  PHO       PF          R  2941440    4  19 82
+    ## 229          Marquese Chriss  PHO       PF          0  2941440    4  19 82
     ## 230              T.J. Warren  PHO       SF          2  2128920    3  23 66
     ## 231           Tyson Chandler  PHO        C         15 12415000    8  34 47
     ##     GS  MIN FGM  FGA Points3 Points3_atts Points2 Points2_atts FTM FTA
@@ -1362,7 +1357,7 @@ plot(players2$EFF, players2$Salary/1000000,col = "#55555555" ,cex = .8, xlab = "
 lines(lowess(players2$EFF, players2$Salary/1000000), lwd = 3, col = "#F15C3C")
 ```
 
-![](hw02-Roberto-Romo_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-1-5.png)
+![](hw02-Roberto-Romo_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-1-4.png)
 
 ``` r
 #linear correlation coefficient
