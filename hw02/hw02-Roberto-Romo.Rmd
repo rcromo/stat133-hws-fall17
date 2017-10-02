@@ -170,8 +170,8 @@ correlation
   1. Making the plots look nice, figuring out read_csv()
 - What things were easy even though we haven't done it in class/lab?
   1. Some of the data frame manipulation
-- Did you need help to complete the assignment>
-  1. No.
+- Did you need help to complete the assignmen?
+  1. Yeah, I workd with Morgan Ewing.
 - How much time did it take to complete this hw?
   1. A couple of hours, (3-4)
 - What was the most time consuming part?
