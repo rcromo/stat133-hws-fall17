@@ -1,0 +1,37 @@
+---
+title: "nba stats dictionary"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Player: name of player
+games_playes: how many games played, char
+minuted: how many total minutes playeed, int
+field_goals_made: how many fg were made, int
+fieal_goals_atts: how many fg attempts were made, int
+field_goals_perc: per of fg made, decimal
+points2_made: how many 2 pointers made, int
+points2_atts: how many 2 pointer attemtps, int
+points2_perc: percentage of 2 pointers made, decimal
+points3_made: how many 3 pointers made, int
+points3_atts: how many 3 pointer attemtps, int
+points3_perc: percentage of 3 pointers made, decimal
+points1_made: how many 1 pointers made, int
+points1_atts: how many 1 pointer attemtps, int
+points1_perc: percentage of 1 pointers made, dec
+off_rebounds: how many offensive rebounds, int
+def_revounds: how many defensive rebounds, int
+assits: how many assists, int
+steals: how many steals, int
+blocks: how many blocks, int
+turnovers: how many turnovers, int
+fouls: how many fouls, int
+
+
+
+
+
+

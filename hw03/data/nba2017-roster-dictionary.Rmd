@@ -1,0 +1,19 @@
+---
+title: "nba roster dictionary"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+player: player name, char
+team: team name, char
+position: player's position, char
+height: int
+weight: int
+age: int
+experience, int
+salary, int
+
+
