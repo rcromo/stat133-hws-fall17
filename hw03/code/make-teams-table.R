@@ -41,7 +41,7 @@ sink((file = '/Users/Roberto/Desktop/133/stat133-hws-fall17/hw03/data/teams-summ
 summary(teams)
 sink()
 
-write.csv(teams, file = '/Users/Roberto/Desktop/133/stat133-hws-fall17/hw03/data/nba2017-teams.cvs', row.names = FALSE)
+write.csv(teams, file = '/Users/Roberto/Desktop/133/stat133-hws-fall17/hw03/data/nba2017-teams.csv', row.names = FALSE)
 
 
 pdf(file = "/Users/Roberto/Desktop/133/stat133-hws-fall17/hw03/images/teams_star_plot.pdf", height = 5)
