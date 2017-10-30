@@ -2,7 +2,7 @@
 title: "SQL for R via SQLDF"
 author: "Roberto Romo"
 date: "10/27/2017"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
