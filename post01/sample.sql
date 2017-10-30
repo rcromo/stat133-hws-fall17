@@ -1,1 +1,0 @@
-"SELECT category from clothing WHERE brand == "Gucci";
