@@ -208,5 +208,17 @@ Are you still not convinced that you may want to give SQL a try or SQL in R? It 
 
 
 
+# Citations
 
+https://github.com/ggrothendieck/sqldf#example-4-join
+https://docs.oracle.com/javase/tutorial/jdbc/overview/database.html
+https://www.w3schools.com/sql/
+https://www.tutorialspoint.com/sql/
+http://www.cs.toronto.edu/~nn/csc309/guide/pointbase/docs/html/htmlfiles/dev_datatypesandconversionsFIN.html
+https://www.w3schools.com/sql/sql_count_avg_sum.asp
+https://www.w3schools.com/sql/sql_alias.asp
+https://www.statmethods.net/management/merging.html
+https://cran.r-project.org/web/packages/sqldf/README.html#examples
+https://jasdumas.github.io/tech-short-papers/sqldf_tutorial.html#join_queries
+https://www.r-bloggers.com/use-sql-to-operate-r-data-frames/
 
