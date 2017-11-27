@@ -2,11 +2,20 @@ library(shiny)
 library(ggvis)
 library(ggplot2)
 source("../code/functions.R")
-scores <- read.csv("../data/cleandata/cleanscores.csv", stringsAsFactors = FALSE)
-grade <- scores[,23]
+dat<- read.csv("../data/cleandata/cleanscores.csv", stringsAsFactors = FALSE)
+
+dat$Grade <- factor(dat$Grade,
+                        levels = c('A+', 'A', 'A-',
+                                   'B+', 'B', 'B-',
+                                   'C+', 'C', 'C-',
+                                   'D', 'F'))
+grade <- dat$Grade
+
+
+
 tabla <- data.frame(table(grade)) 
 tabla$Prop <- prop.table(tabla$Freq) 
-categorical <- colnames(scores[,-23])
+categorical <- colnames(dat[,-23])
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -49,13 +58,13 @@ ui <- fluidPage(
 server <- function(input, output) {
     vis_histogram <- reactive({
       v1 <- prop("x", as.symbol(input$v1))
-      scores %>% 
+      dat %>% 
         ggvis(x = v1, fill := "#abafb3") %>% 
         layer_histograms(stroke := 'white',width = input$width)
     })
     output$summary <- renderPrint({
       v1 <- prop("x", as.symbol(input$v1))
-      print_stats(summary_stats(scores[,input$v1]))
+      print_stats(summary_stats(dat[,input$v1]))
     })
     
     vis_histogram %>% bind_shiny("p2")
@@ -64,7 +73,7 @@ server <- function(input, output) {
       v2 <- prop("x", as.symbol(input$v2))
       v3 <- prop("y", as.symbol(input$v3))
  
-      scores %>% 
+      dat %>% 
         ggvis(x = v2, y = v3, opacity := input$opacity) %>% 
         layer_points()
     })
@@ -80,7 +89,7 @@ server <- function(input, output) {
     output$correlation <- renderPrint({
       v2 <- prop("x", as.numeric(input$v2))
       v3 <- prop("y", as.numeric(input$v3))
-      print(cor(x = scores[,input$v2], y = scores[,input$v3]))
+      print(cor(x = dat[,input$v2], y = dat[,input$v3]))
     })
 }
 # Run the application 
