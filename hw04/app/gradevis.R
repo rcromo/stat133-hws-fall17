@@ -16,6 +16,7 @@ grade <- dat$Grade
 tabla <- data.frame(table(grade)) 
 tabla$Prop <- prop.table(tabla$Freq) 
 categorical <- colnames(dat[,-23])
+lineOptions <- c("none", "lm", "loess")
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -39,7 +40,9 @@ ui <- fluidPage(
                        selectInput("v3", "Y-axis Variable", categorical,
                                    selected = "Overall"),
                        sliderInput("opacity", "Opacity",
-                                   min = 0, max = 1, value = .1))
+                                   min = 0, max = 1, value = .1),
+                      radioButtons("showline", "Show Line", lineOptions, selected="none"))
+                              
     ),
     # Show a plot of the generated distribution
     mainPanel(
@@ -73,9 +76,22 @@ server <- function(input, output) {
       v2 <- prop("x", as.symbol(input$v2))
       v3 <- prop("y", as.symbol(input$v3))
  
-      dat %>% 
-        ggvis(x = v2, y = v3, opacity := input$opacity) %>% 
-        layer_points()
+      ## dat %>% 
+         ## ggvis(x = v2, y = v3, opacity := input$opacity) %>% 
+        ## layer_points()
+        if (input$showline == "loess") {
+          scatterplot <- dat %>% 
+            ggvis(x = v2, y = v3, opacity := input$opacity) %>% 
+            layer_points()  %>% layer_smooths()
+        } else if (input$showline == "lm") {
+          scatterplot <- dat %>% 
+            ggvis(x = v2, y = v3, opacity := input$opacity) %>% 
+            layer_points()  %>% layer_model_predictions(model= "lm",se=FALSE)
+        } else {
+          scatterplot <- dat %>% 
+            ggvis(x = v2, y = v3, opacity := input$opacity) %>% 
+            layer_points()
+        }
     })
     output$v1 <- renderTable({
       tabla
